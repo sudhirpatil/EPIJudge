@@ -1,4 +1,4 @@
-package epi;
+package epi.StringsCh6;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TimedExecutor;
