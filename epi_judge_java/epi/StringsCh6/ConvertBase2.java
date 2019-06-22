@@ -1,7 +1,7 @@
 package epi.StringsCh6;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
-public class ConvertBase {
+public class ConvertBase2 {
   @EpiTest(testDataFile = "convert_base.tsv")
 
   public static String convertBaseOld(String numAsString, int b1, int b2) {
@@ -84,7 +84,7 @@ public class ConvertBase {
   public static void main(String[] args) {
     System.exit(
         GenericTest
-            .runFromAnnotations(args, "ConvertBase.java",
+            .runFromAnnotations(args, "ConvertBase2.java",
                                 new Object() {}.getClass().getEnclosingClass())
             .ordinal());
 //    convertBase("A1", 16, 7);

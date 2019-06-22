@@ -2,7 +2,7 @@ package epi.StringsCh6;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
-public class StringIntegerInterconversion {
+public class StringIntegerInterconversion1 {
 
   public static String intToString(int x) {
     String sign = "";
@@ -54,7 +54,7 @@ public class StringIntegerInterconversion {
   public static void main(String[] args) {
     System.exit(
         GenericTest
-            .runFromAnnotations(args, "StringIntegerInterconversion.java",
+            .runFromAnnotations(args, "StringIntegerInterconversion1.java",
                                 new Object() {}.getClass().getEnclosingClass())
             .ordinal());
   }

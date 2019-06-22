@@ -4,7 +4,7 @@ import epi.test_framework.GenericTest;
 import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
 import java.util.List;
-public class ReplaceAndRemove {
+public class ReplaceAndRemove4 {
 
   public static int replaceAndRemove(int size, char[] s) {
     // delete char b's, keep shifting characters to left
@@ -19,6 +19,7 @@ public class ReplaceAndRemove {
       }
     }
 
+    //TODO:: count a's in above loop & use delIndex + aSize instead of s.length to avoid las loop for shifting
     int replaceIndex = s.length -1;
     for(int j= delIndex -1; j>=0; j--){
       if(s[j] == 'a'){
@@ -62,7 +63,7 @@ public class ReplaceAndRemove {
   public static void main(String[] args) {
     System.exit(
         GenericTest
-            .runFromAnnotations(args, "ReplaceAndRemove.java",
+            .runFromAnnotations(args, "ReplaceAndRemove4.java",
                                 new Object() {}.getClass().getEnclosingClass())
             .ordinal());
   }
