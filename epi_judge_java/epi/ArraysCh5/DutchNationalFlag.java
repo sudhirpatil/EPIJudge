@@ -1,14 +1,53 @@
-package epi;
+package epi.ArraysCh5;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
 import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 public class DutchNationalFlag {
   public enum Color { RED, WHITE, BLUE }
+  /*
+  Took long time understand question correctly
+  Initially ignored the different cases
+  Long time decide on correct and optimal logic, correct & optimal did not flash till multiple iterations
+  * Silly mistakes in loops, variables count logic etc
+
+  Write down overall broad logic so that it is clear while writing code
+  Be clear about every variable and loop logic, do not write until logic is clear in head
+  When copy pasted look at the variables and logic
+  Always review
+  Give dedicated fully focused effort, be very fast
+
+   */
 
   public static void dutchFlagPartition(int pivotIndex, List<Color> A) {
+    //one loop to move smaller to starting part of array
+    // another loop to move larger to end part
+
+    Color pivot = A.get(pivotIndex);
+    int size = A.size();
+
+    int smaller =0;
+    for(int i=0; i< size; i++){
+      if(A.get(i).ordinal() == 0){
+        Collections.swap(A, smaller, i);
+        smaller++;
+      }
+    }
+
+    int larger = size-1;
+    for(int j=size-1; j>=smaller;j--){
+      if(A.get(j).ordinal() == 2){
+        Collections.swap(A, larger, j);
+        larger--;
+      }
+    }
+  }
+
+
+  public static void dutchFlagPartitionOld(int pivotIndex, List<Color> A) {
     Color pivot = A.get(pivotIndex);
     int size = A.size()-1;
 
@@ -37,19 +76,7 @@ public class DutchNationalFlag {
     }
     System.out.println("Second : "+A);
 
-    /*
-    Took long time understand question correctly
-    Initially ignored the different cases
-    Long time decide on correct and optimal logic, correct & optimal did not flash till multiple iterations
-    * Silly mistakes in loops, variables count logic etc
 
-    Write down overall broad logic so that it is clear while writing code
-    Be clear about every variable and loop logic, do not write until logic is clear in head
-    When copy pasted look at the variables and logic
-    Always review
-    Give dedicated fully focused effort, be very fast
-
-     */
   }
 
   public  static void  replace(List<Color> A, int i, int j){
