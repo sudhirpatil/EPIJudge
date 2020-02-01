@@ -9,13 +9,58 @@ public class DutchNationalFlag {
   public enum Color { RED, WHITE, BLUE }
 
   public static void dutchFlagPartition(int pivotIndex, List<Color> A) {
-    // TODO - you fill in here.
-    return;
+    Color pivot = A.get(pivotIndex);
+    int size = A.size()-1;
+
+    System.out.println("\n "+pivot+" size:"+size);
+    System.out.println("Original :"+A);
+    int count =0;
+    for(int i=size; i > count ;i--){
+      if(A.get(i).compareTo(Color.RED) == 0){
+        while (A.get(count).compareTo(Color.RED)== 0 && i>count) count++;
+        replace(A, count, i);
+        count++;
+      }
+    }
+    System.out.println("First : "+A);
+    if (pivot.compareTo(Color.RED) == 0) return;
+
+    int blueCount=0;
+    for(int j= count; j< size-blueCount; j++){
+
+      if(A.get(j).compareTo(Color.BLUE) == 0){
+        while (A.get(size - blueCount).compareTo(Color.BLUE)== 0 & j < size -blueCount) blueCount++;
+
+        replace(A, j, size-blueCount);
+        blueCount++;
+      }
+    }
+    System.out.println("Second : "+A);
+
+    /*
+    Took long time understand question correctly
+    Initially ignored the different cases
+    Long time decide on correct and optimal logic, correct & optimal did not flash till multiple iterations
+    * Silly mistakes in loops, variables count logic etc
+
+    Write down overall broad logic so that it is clear while writing code
+    Be clear about every variable and loop logic, do not write until logic is clear in head
+    When copy pasted look at the variables and logic
+    Always review
+    Give dedicated fully focused effort, be very fast
+
+     */
   }
+
+  public  static void  replace(List<Color> A, int i, int j){
+    Color temp = A.get(i);
+    A.set(i, A.get(j));
+    A.set(j, temp);
+  }
+
   @EpiTest(testDataFile = "dutch_national_flag.tsv")
   public static void dutchFlagPartitionWrapper(TimedExecutor executor,
-                                               List<Integer> A, int pivotIdx)
-      throws Exception {
+                                               List<Integer> A, int pivotIdx) throws Exception {
     List<Color> colors = new ArrayList<>();
     int[] count = new int[3];
 
