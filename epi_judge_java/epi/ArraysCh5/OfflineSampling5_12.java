@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class OfflineSampling5_12 {
   // Be careful about array size and index , index starts from 0
-  // for use case validation, write down numbers on paper and validate case
+  // for use case validation, write down numbers on paper and validate cas
   public static void randomSampling(int k, List<Integer> A) {
     Random rand = new Random();
     k--;
