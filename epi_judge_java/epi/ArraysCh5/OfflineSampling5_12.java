@@ -1,4 +1,4 @@
-package epi;
+package epi.ArraysCh5;
 import epi.test_framework.EpiTest;
 import epi.test_framework.RandomSequenceChecker;
 import epi.test_framework.GenericTest;
@@ -6,10 +6,19 @@ import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-public class OfflineSampling {
+import java.util.Random;
+
+public class OfflineSampling5_12 {
+  // Be careful about array size and index , index starts from 0
+  // for use case validation, write down numbers on paper and validate case
   public static void randomSampling(int k, List<Integer> A) {
-    // TODO - you fill in here.
-    return;
+    Random rand = new Random();
+    k--;
+    // get random nos from count to n, in loop till count =k
+    // replace rand with count element
+    for(int count=0; count < k; count++){
+      Collections.swap(A, count, rand.nextInt(k-count) +count);
+    }
   }
   private static boolean randomSamplingRunner(TimedExecutor executor, int k,
                                               List<Integer> A)
