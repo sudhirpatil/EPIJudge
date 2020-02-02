@@ -7,6 +7,13 @@ import java.util.List;
 public class SpiralOrderingSegments5_18 {
   @EpiTest(testDataFile = "spiral_ordering_segments.tsv")
 
+  /*
+  Stuck at rounding up
+  Check what should be return value, wasted time in sys out
+  Be fast and dedicated time in developing, concentrated as if doing in test
+
+  Logic got it right without any changes
+   */
   public static List<Integer> matrixInSpiralOrder(List<List<Integer>> squareMatrix) {
     // loop for each spiral layer rowCount / 2
     // loop for going through spiral
