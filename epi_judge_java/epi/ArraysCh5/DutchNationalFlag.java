@@ -22,6 +22,10 @@ public class DutchNationalFlag {
 
    */
 
+  /* KEY
+  use Collections.swap
+   */
+
   public static void dutchFlagPartition(int pivotIndex, List<Color> A) {
     //one loop to move smaller to starting part of array
     // another loop to move larger to end part
