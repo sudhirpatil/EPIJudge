@@ -19,7 +19,6 @@ public class DutchNationalFlag {
   When copy pasted look at the variables and logic
   Always review
   Give dedicated fully focused effort, be very fast
-
    */
 
   /* KEY

@@ -1,14 +1,45 @@
-package epi;
+package epi.ListCh7;
+import epi.ListNode;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
 import epi.test_framework.TimedExecutor;
-public class IsListCyclic {
+public class IsListCyclic7_3 {
+
+  // to many mistakes in getting if else conditions correct
+  // pay attention to all the conditions == or !=
 
   public static ListNode<Integer> hasCycle(ListNode<Integer> head) {
-    // TODO - you fill in here.
-    return null;
+    // find out if it has cycle, by using 2 iterators, 1 with 1 & 2nd 2 steps
+    // find out cycle length
+    // 2 iterator, 1 with 1 step & 2nd with cycle length step
+    ListNode<Integer> list1 = head, list2 = head;
+    while (list1 != null && list2 != null ) {
+      list1 = list1.next;
+      if(list2.next == null) break;
+      list2 = list2.next.next;
+      if(list1 == list2) break;
+    }
+
+    if(list1 == null || list2 == null || list2.next == null || list1 != list2) return null;
+
+    int cycleLength=1;
+    list2= list2.next;
+    for(; list2 != list1; cycleLength++) list2= list2.next;
+
+    ListNode<Integer> listCycle = head;
+    for(int j=1; j<= cycleLength;j++) listCycle = listCycle.next;
+    while (head != listCycle) {
+      head = head.next;
+      listCycle = listCycle.next;
+    }
+    return listCycle;
   }
+
+  /**
+   * Lot of mistakes in comparisons in while loop & if conditions. How to fix it?
+   * flawed logic on how to get meeting point, not sure why i put -1 & < in comparison
+   */
   @EpiTest(testDataFile = "is_list_cyclic.tsv")
   public static void HasCycleWrapper(TimedExecutor executor,
                                      ListNode<Integer> head, int cycleIdx)
