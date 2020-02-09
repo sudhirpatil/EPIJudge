@@ -1,23 +1,27 @@
-package epi;
+package epi.StackQueue8;
 import epi.test_framework.EpiTest;
 import epi.test_framework.EpiUserType;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
-import java.util.List;
-import java.util.NoSuchElementException;
 
-public class QueueWithMax {
+import java.util.*;
+
+// Not working
+public class QueueWithMax8_1 {
+  Deque<Integer> queue = new ArrayDeque<>();
   public void enqueue(Integer x) {
-    // TODO - you fill in here.
+    queue.push(x);
     return;
   }
   public Integer dequeue() {
-    // TODO - you fill in here.
-    return 0;
+    return queue.poll();
   }
   public Integer max() {
-    // TODO - you fill in here.
-    return 0;
+    Integer max = Integer.MIN_VALUE;
+    for(Iterator<Integer> iter = queue.iterator();iter.hasNext();){
+      max = Math.max(max, iter.next());
+    }
+    return max;
   }
   @EpiUserType(ctorParams = {String.class, int.class})
   public static class QueueOp {
@@ -33,12 +37,12 @@ public class QueueWithMax {
   @EpiTest(testDataFile = "queue_with_max.tsv")
   public static void queueTest(List<QueueOp> ops) throws TestFailure {
     try {
-      QueueWithMax q = new QueueWithMax();
+      QueueWithMax8_1 q = new QueueWithMax8_1();
 
       for (QueueOp op : ops) {
         switch (op.op) {
         case "QueueWithMax":
-          q = new QueueWithMax();
+          q = new QueueWithMax8_1();
           break;
         case "enqueue":
           q.enqueue(op.arg);

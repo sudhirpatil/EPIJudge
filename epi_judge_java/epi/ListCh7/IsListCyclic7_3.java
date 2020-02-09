@@ -8,8 +8,29 @@ public class IsListCyclic7_3 {
 
   // to many mistakes in getting if else conditions correct
   // pay attention to all the conditions == or !=
+  // again missed at && || in while loop and
 
   public static ListNode<Integer> hasCycle(ListNode<Integer> head) {
+    // Floyd's cycle detection algorithm
+    // find meeting point by moving one pointer at 1x & another pointer at 2x
+    // start iteration, one from meeting point & another from head at same 1x speed, till they meet, thats the cycle start
+    ListNode<Integer> first = head, second = head;
+    while(second!= null && second.next != null && second.next.next != null){
+      first = first.next;
+      second = second.next.next;
+      if(first == second){
+        // cycle exists
+        while (head != first){
+          head = head.next;
+          first = first.next;
+        }
+        return first;
+      }
+    }
+    return null;
+  }
+
+  public static ListNode<Integer> hasCycleNonOptimal(ListNode<Integer> head) {
     // find out if it has cycle, by using 2 iterators, 1 with 1 & 2nd 2 steps
     // find out cycle length
     // 2 iterator, 1 with 1 step & 2nd with cycle length step
