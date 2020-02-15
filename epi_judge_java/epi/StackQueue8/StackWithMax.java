@@ -6,23 +6,29 @@ import epi.test_framework.TestFailure;
 
 import java.util.*;
 
-// Not working
-public class QueueWithMax8_1 {
-  Deque<Integer> queue = new ArrayDeque<>();
+public class StackWithMax {
+  Deque<List<Integer>> queue = new ArrayDeque<>();
+
   public void enqueue(Integer x) {
-    queue.push(x);
+    Integer max;
+    if(queue.isEmpty()){
+      max = x;
+    }else {
+      max = Math.max(x, queue.peek().get(1));
+    }
+
+    queue.offer(Arrays.asList(x, max));
     return;
   }
+
   public Integer dequeue() {
-    return queue.poll();
+    return queue.poll().get(0);
   }
+
   public Integer max() {
-    Integer max = Integer.MIN_VALUE;
-    for(Iterator<Integer> iter = queue.iterator();iter.hasNext();){
-      max = Math.max(max, iter.next());
-    }
-    return max;
+    return queue.peek().get(1);
   }
+
   @EpiUserType(ctorParams = {String.class, int.class})
   public static class QueueOp {
     public String op;
@@ -37,12 +43,12 @@ public class QueueWithMax8_1 {
   @EpiTest(testDataFile = "queue_with_max.tsv")
   public static void queueTest(List<QueueOp> ops) throws TestFailure {
     try {
-      QueueWithMax8_1 q = new QueueWithMax8_1();
+      StackWithMax q = new StackWithMax();
 
       for (QueueOp op : ops) {
         switch (op.op) {
         case "QueueWithMax":
-          q = new QueueWithMax8_1();
+          q = new StackWithMax();
           break;
         case "enqueue":
           q.enqueue(op.arg);

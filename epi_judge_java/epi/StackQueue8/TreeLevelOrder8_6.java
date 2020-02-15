@@ -41,11 +41,6 @@ public class TreeLevelOrder8_6 {
     return oList;
   }
 
-
-
-
-
-
   public static List<List<Integer>>
   binaryTreeDepthOrderOld2(BinaryTreeNode<Integer> tree) {
     List<List<Integer>> allLevles = new ArrayList<>();
