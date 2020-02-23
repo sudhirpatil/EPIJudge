@@ -13,6 +13,8 @@ public class PhoneNumberMnemonic6_7 {
 
   /*
   Few problems are very elegantly and easily solved by recursion : find out what kind of patterns we should use recursion?
+    When number of for loops are not known or too big, like in this case phone number size not known
+    Wherever we need to use stack, which cases to use recursion instead of stack?
   While using recursion, Have clarity on what should be termination point? what is return value? return values from top level functions
    */
   @EpiTest(testDataFile = "phone_number_mnemonic.tsv")
