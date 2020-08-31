@@ -9,6 +9,20 @@ public class SearchShiftedSortedArray11_3 {
   @EpiTest(testDataFile = "search_shifted_sorted_array.tsv")
 
   public static int searchSmallest(List<Integer> A) {
+    int left = 0, right = A.size()-1;
+
+    while(left<right){
+      int mid = left + ((right - left)/2);
+      if(A.get(mid) > A.get(right)){
+        left = mid + 1;
+      }else{
+        right = mid;
+      }
+    }
+    return left;
+  }
+
+  public static int searchSmallestOptimal(List<Integer> A) {
     int pIndex = 0;
     if(A.get(0) > A.get(A.size()-1)){
       int start = 0, end = A.size()-1;
