@@ -10,8 +10,71 @@ public class ReplaceAndRemove6_4 {
   Careful about the array sizes
   Revise program once done
   keep overall flow  in your mental model
+
+  read the question correctly: what are inputs, what is exactly expected ; missed size is of number of characters not the array size
+  array index starts with 0 & so max length + 1 = size : confused with size/count with index in array
+  Careful about ++/-- in array index : better do it outside index
+  prefer for loop over while, as variable initiation/increment etc more clear
    */
   public static int replaceAndRemove(int size, char[] s) {
+    int pos = 0, aCount = 0;
+    for(int i = 0; i< size ; i++){
+
+      if(s[i] != 'b'){
+        if(s[i] == 'a') aCount++;
+
+        s[pos] = s[i];
+        pos++;
+      }}
+
+      int finalSize = pos + aCount - 1;
+      for(int j=pos-1; j>=0; j--, finalSize--){
+        if(s[j] == 'a') {
+          s[finalSize] = 'd';
+          finalSize--;
+          s[finalSize] = 'd';
+        }else{
+          s[finalSize] = s[j];
+        }
+      }
+    return pos + aCount;
+  }
+
+
+
+
+
+
+
+
+  public static int replaceAndRemove2(int size, char[] s) {
+    /*
+    iterate, 2 indexes one original another after delete, if b don't copy other chars copy to new pos
+    Start from original size, copy to new size index or add with 2 chars to new pos, iteration decreasing
+     */
+    int pos = 0, aCount =0;
+    for(int i=0; i<size; i++){
+      if(s[i] != 'b'){
+        if(s[i] == 'a') aCount++;
+        s[pos] = s[i];
+        pos++;
+      }
+    }
+
+    for(int j= pos-1, newSize = pos + aCount -1; j >=0 ; j--, newSize--){
+      if(s[j] == 'a'){
+        s[newSize] = 'd';
+        newSize--;
+        s[newSize] = 'd';
+      }else{
+        s[newSize] = s[j];
+      }
+    }
+    return pos + aCount;
+  }
+
+
+  public static int replaceAndRemove1(int size, char[] s) {
     // iterate remove b's, move other chars to new place, also count a's
     // start from the from new size, move new size -> nSize + aCount
     int aCount = 0, bCount = 0;

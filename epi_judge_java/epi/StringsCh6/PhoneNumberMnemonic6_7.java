@@ -16,9 +16,49 @@ public class PhoneNumberMnemonic6_7 {
     When number of for loops are not known or too big, like in this case phone number size not known
     Wherever we need to use stack, which cases to use recursion instead of stack?
   While using recursion, Have clarity on what should be termination point? what is return value? return values from top level functions
+
+  How to calculate O(n) for recursions?
+  How to get number of permutations in this case, where each index can represent 4 possible values?
    */
+
   @EpiTest(testDataFile = "phone_number_mnemonic.tsv")
   public static List<String> phoneMnemonic(String phoneNumber) {
+    List<String> lst = new LinkedList<>();
+    phoneRecursive(phoneNumber, "", lst);
+    return lst;
+  }
+
+  public static void phoneRecursive(String phoneNumber, String phoneStrin, List<String> lst){
+    if(phoneNumber.isEmpty()) {
+      lst.add(phoneStrin);
+      return ;
+    }
+
+    for(char ch : digitCharMap[(int)(phoneNumber.charAt(0) - '0')].toCharArray()){
+      phoneRecursive(phoneNumber.substring(1), phoneStrin + ch, lst);
+    }
+    return ;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public static List<String> phoneMnemonic1(String phoneNumber) {
     List<String> list = new ArrayList<>();
     return phoneMnemonicRecurse(phoneNumber, "");
   }

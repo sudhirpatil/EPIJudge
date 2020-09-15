@@ -7,6 +7,39 @@ import java.util.Collections;
 
 public class ConvertBase6_2 {
   @EpiTest(testDataFile = "convert_base.tsv")
+
+  public static String convertBase(String numAsString, int b1, int b2) {
+    /*
+    convert to int from b1
+    int b1 to str b2,
+      devide b1 num by b2, append to stringBuffer, repeat with b2 * b2
+      append - if negative & reverse string
+     */
+    boolean isNeg = numAsString.charAt(0) == '-';
+    int b1Num = 0;
+    for(char ch: numAsString.substring(isNeg?1 : 0).toCharArray()){
+      b1Num = ((int) ch - '0') + b1Num * b1;
+    }
+
+    StringBuffer sb = new StringBuffer();
+    do{
+      sb.append(((char) Math.abs(b1Num % b2)));
+      b1Num /= b2;
+    }while(b1Num > 0);
+    return sb.append(isNeg ? "-" : "").reverse().toString();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 Missed character cases A, F, blunder fixed one case but not another : revise through solution, recheck boundary conditions
 Missed converting to char from int :
@@ -15,7 +48,7 @@ Fixing bug takes more time than, revise & fix
 
 Have mental model of whole program
  */
-  public static String convertBase(String numAsString, int b1, int b2) {
+  public static String convertBase1(String numAsString, int b1, int b2) {
     // convert to base10 int
     // start from leftmost char, num * b1 + current num
     // convert to base b2
