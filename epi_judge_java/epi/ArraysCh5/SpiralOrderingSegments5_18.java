@@ -8,11 +8,13 @@ public class SpiralOrderingSegments5_18 {
   @EpiTest(testDataFile = "spiral_ordering_segments.tsv")
 
   /*
-  Stuck at rounding up
-  Check what should be return value, wasted time in sys out
-  Be fast and dedicated time in developing, concentrated as if doing in test
+  Rounding up  : Match.ceil((double) a/b)
 
-  Logic got it right without any changes
+  How to cycle, externalize adding,sub using 2d array (0,1)(0,-1) etc.
+  Mark visited index 0, to know when to turn cycle & enter inner circle
+
+  last increment in loop i++, increases
+  missed creating row from cy index
    */
 
   /* KEY
@@ -20,6 +22,52 @@ public class SpiralOrderingSegments5_18 {
     mark visited cell with 0
    */
   public static List<Integer> matrixInSpiralOrder(List<List<Integer>> squareMatrix) {
+    List<Integer> list = new ArrayList<>();
+    int n = squareMatrix.size();
+    int[][] dims= {{0,1}, {1,0},{0,-1},{-1,0}};
+    int x=0, y=0,dim =0;
+    for(int i=0;i<n*n; i++){
+      list.add(squareMatrix.get(x).get(y));
+      squareMatrix.get(x).set(y, 0);
+      int nextX= x + dims[dim][0], nextY = y + dims[dim][1];
+      //need to change deems?
+      if(nextX<0 || nextX>=n || nextY <0 || nextY >=n || squareMatrix.get(nextX).get(nextY) ==0){
+        dim = (dim + 1) % 4;
+        nextX= x + dims[dim][0];
+        nextY = y + dims[dim][1];
+      }
+
+        x = nextX;
+        y = nextY;
+    }
+    return list;
+  }
+
+
+  public static List<Integer> matrixInSpiralOrder2(List<List<Integer>> squareMatrix) {
+    List<Integer> list = new ArrayList();
+    int n = squareMatrix.size()-1, row = 0, col= 0;
+    System.out.println("n:"+n);
+    for(int cy=0; cy<Math.ceil((double)(n+1)/2);cy++){
+      System.out.println("n:"+n);
+      // horizontal fwd
+      for(col=cy;col<=n-cy;col++)
+        list.add(squareMatrix.get(row).get(col));
+      col--;
+      for(row=cy+1;row<=n-cy;row++)
+        list.add(squareMatrix.get(row).get(col));
+      row--;
+      for(col=col-1;col>=cy;col--)
+        list.add(squareMatrix.get(row).get(col));
+      col++;
+      for(row=row-1;row>=cy+1;row--)
+        list.add(squareMatrix.get(row).get(col));
+      row++;
+    }
+    return list;
+  }
+
+  public static List<Integer> matrixInSpiralOrder1(List<List<Integer>> squareMatrix) {
     List<Integer> list = new ArrayList<>();
     // define 2d array for boundary additions
     // for loop for n * n

@@ -7,11 +7,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class OfflineSampling5_12 {
-  // Be careful about array size and index , index starts from 0
+  // API for Random Number. Random().nextInt(maxBound)
+  // missed case for i + random
   // for use case validation, write down numbers on paper and validate cas
   public static void randomSampling(int k, List<Integer> A) {
+    Random rand = new Random();
+    for(int i=0; i<k ; i++){
+      Collections.swap(A, i , i+ rand.nextInt(A.size()-i));
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public static void randomSampling1(int k, List<Integer> A) {
     Random rand = new Random();
     k--;
     // get random nos from count to n, in loop till count =k
