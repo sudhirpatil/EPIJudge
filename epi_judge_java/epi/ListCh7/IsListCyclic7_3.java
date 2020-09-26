@@ -9,8 +9,20 @@ public class IsListCyclic7_3 {
   // to many mistakes in getting if else conditions correct
   // pay attention to all the conditions == or !=
   // again missed at && || in while loop and
-
   public static ListNode<Integer> hasCycle(ListNode<Integer> head) {
+    if(head == null || head.next == null || head.next.next == null){
+      return null;
+    }
+    ListNode<Integer> first = head.next, sec = head.next.next;
+    while(first !=null && sec !=null && first != sec){
+      first = first.next;
+
+      sec = sec.next !=null ? sec.next.next : null;
+    }
+    return (first==null || sec == null) ? null : first;
+  }
+
+  public static ListNode<Integer> hasCycle2(ListNode<Integer> head) {
     // Floyd's cycle detection algorithm
     // find meeting point by moving one pointer at 1x & another pointer at 2x
     // start iteration, one from meeting point & another from head at same 1x speed, till they meet, thats the cycle start

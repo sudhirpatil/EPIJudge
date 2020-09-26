@@ -1,7 +1,9 @@
-package epi;
+package epi.ListCh7;
+import epi.ListNode;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
-public class SortedListsMerge {
+
+public class SortedListsMerge7_1 {
   @EpiTest(testDataFile = "sorted_lists_merge.tsv")
   /*
   Use Dummy head node, then no need of special case of selecting head node, logic for head node is same as other nodes
@@ -15,6 +17,7 @@ public class SortedListsMerge {
 
     while(L1!=null && L2!=null){
       if(L1.data <= L2.data){
+
         current.next = L1;
         L1 = L1.next;
       }else{

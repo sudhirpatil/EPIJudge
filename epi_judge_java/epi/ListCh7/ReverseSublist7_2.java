@@ -2,10 +2,42 @@ package epi.ListCh7;
 import epi.ListNode;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
-public class ReverseSublist {
+public class ReverseSublist7_2 {
   @EpiTest(testDataFile = "reverse_sublist.tsv")
 
   public static ListNode<Integer> reverseSublist(ListNode<Integer> L, int start,
+                                                  int finish) {
+    ListNode<Integer> current = L, prev = null, startPrev, startHead;
+    int i = 1;
+    while(i < start){
+      current = current.next;
+      i++;
+    }
+    // To point correct nodes after sublist reversal :
+    //
+    // preserve start prev to point prev.next to revLast
+    // & startHead.next to prev.next
+    startPrev = current;
+    current = current.next;
+    startHead = current;
+
+    while(start<= finish){
+      // Point next to prev, move current to original next using temp, point prev to current for next iteration reverse
+      ListNode<Integer> temp = current.next;
+      current.next = prev;
+      prev = current;
+      current = temp;
+
+    }
+    startPrev.next = prev;
+    startHead.next = current;
+
+    return L;
+  }
+
+
+
+  public static ListNode<Integer> reverseSublist2(ListNode<Integer> L, int start,
                                                        int finish) {
     if(L == null || L.next == null) return L;
     ListNode<Integer> origStartNode = L;
