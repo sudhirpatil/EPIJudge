@@ -5,6 +5,48 @@ import epi.test_framework.*;
 
 public class LowestCommonAncestorWithParent04 {
 
+  public static BinaryTree<Integer> LCA(BinaryTree<Integer> node0,
+                                        BinaryTree<Integer> node1) {
+    int h0 = getHeightNew(node0);
+    int h1 = getHeightNew(node1);
+    while (h0>h1) {
+      node0 = node0.parent;
+      h0--;
+    }
+    while (h1 > h0){
+      node1 = node1.parent;
+      h1--;
+    }
+
+    while (node0 != null && node1 != null && node0 != node1){
+      node0 = node0.parent;
+      node1 =node1.parent;
+    }
+
+    return (node0 != null && node1 != null && node0 == node1)? node0 : null;
+  }
+
+  public static int getHeightNew(BinaryTree<Integer> node){
+    int count=0;
+    while(node != null){
+      node = node.parent;
+      count++;
+    }
+    return count;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   public  static int getHeight(BinaryTree<Integer> node) {
     int height = 0;
     while(node.parent != null){
@@ -14,7 +56,7 @@ public class LowestCommonAncestorWithParent04 {
     return height;
   }
 
-  public static BinaryTree<Integer> LCA(BinaryTree<Integer> node0,
+  public static BinaryTree<Integer> LCA1(BinaryTree<Integer> node0,
                                         BinaryTree<Integer> node1) {
     int height0 = getHeight(node0);
     int height1 = getHeight(node1);

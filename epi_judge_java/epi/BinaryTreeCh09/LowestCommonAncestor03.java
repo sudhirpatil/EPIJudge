@@ -5,11 +5,61 @@ import epi.test_framework.*;
 
 public class LowestCommonAncestor03 {
   /*
+  Assumptions need to questioned, Can tree have duplicates?  can node0 == node2?
+
   object/tuple with match count and common ancestor node for return
   on any one match of node & tree increase count by 1 & return
   if on any return left/right count is 2 just return the status object no need to proceed with other part of recursion
   because of recursion only at the level of common ancestor both left count & right count will be 1 i.e 1+1 = 2 ?
    */
+
+  @EpiTest(testDataFile = "lowest_common_ancestor.tsv")
+  public static BinaryTreeNode<Integer> LCA(BinaryTreeNode<Integer> tree,
+                                            BinaryTreeNode<Integer> node0,
+                                            BinaryTreeNode<Integer> node1) {
+    return fetchLCA(tree, node0, node1).parent;
+
+  }
+
+  public  static RetStat fetchLCA(BinaryTreeNode<Integer> tree,
+  BinaryTreeNode<Integer> node0,
+  BinaryTreeNode<Integer> node1){
+    if(tree == null)
+      return new RetStat(0, null);
+
+    RetStat left = fetchLCA(tree.left, node0, node1);
+    if(left.count == 2)
+      return left;
+
+    RetStat right = fetchLCA(tree.right, node0, node1);
+    if(right.count == 2)
+      return right;
+
+    int count = left.count + right.count +
+            (tree == node0 ? 1 : 0 )+
+            (tree == node1 ? 1 :0);
+
+    return new RetStat(count, count == 2 ? tree: null);
+
+  }
+
+  public static class RetStat {
+    int count;
+    BinaryTreeNode<Integer> parent;
+
+    RetStat(int count, BinaryTreeNode<Integer> parent){
+      this.count = count;
+      this.parent = parent;
+    }
+  }
+
+
+
+
+
+
+
+
   public static class Status{
     int count;
     BinaryTreeNode<Integer> node;
@@ -37,13 +87,12 @@ public class LowestCommonAncestor03 {
     return new Status(count , (count == 2)? tree: null);
   }
 
-  public static BinaryTreeNode<Integer> LCA(BinaryTreeNode<Integer> tree,
+  public static BinaryTreeNode<Integer> LCA1(BinaryTreeNode<Integer> tree,
                                             BinaryTreeNode<Integer> node0,
                                             BinaryTreeNode<Integer> node1) {
     return findLCA(tree, node0, node1).node;
   }
-  @EpiTest(testDataFile = "lowest_common_ancestor.tsv")
-  public static int lcaWrapper(TimedExecutor executor,
+  public static int lcaWrapper1(TimedExecutor executor,
                                BinaryTreeNode<Integer> tree, Integer key0,
                                Integer key1) throws Exception {
     BinaryTreeNode<Integer> node0 = BinaryTreeUtils.mustFindNode(tree, key0);

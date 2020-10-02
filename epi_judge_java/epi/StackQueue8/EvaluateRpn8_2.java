@@ -16,8 +16,40 @@ public class EvaluateRpn8_2 {
    * Missed sequencing when data popped from stack
    */
 
-  // using hashmap with function as value for operation
   public static int eval(String expression) {
+    Deque<String> queue = new ArrayDeque<>();
+    for(String str: expression.split(",")){
+      queue.offer(str);
+    }
+
+    while (queue.size() > 1){
+      int first = Integer.parseInt(queue.poll());
+      int sec = Integer.parseInt(queue.poll());
+      String opr = queue.poll();
+      int res=0;
+      switch (opr){
+        case "+":
+          res = first + sec;
+          break;
+        case "-":
+          res = first - sec;
+          break;
+        case "X":
+          res = first * sec;
+          break;
+        case "/":
+          res = first / sec;
+          break;
+      }
+      queue.offer(Integer.toString(res));
+    }
+    return (queue.size()>0)? Integer.parseInt(queue.poll()) : 0;
+
+
+  }
+
+  // using hashmap with function as value for operation
+  public static int eval2(String expression) {
     Deque<Integer> numbersStack = new ArrayDeque<>();
 
     // Map with function to operate on numbers

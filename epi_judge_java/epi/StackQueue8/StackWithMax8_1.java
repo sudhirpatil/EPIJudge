@@ -6,7 +6,8 @@ import epi.test_framework.TestFailure;
 
 import java.util.*;
 
-public class StackWithMax {
+public class StackWithMax8_1 {
+
   Deque<List<Integer>> queue = new ArrayDeque<>();
 
   public void enqueue(Integer x) {
@@ -43,12 +44,12 @@ public class StackWithMax {
   @EpiTest(testDataFile = "queue_with_max.tsv")
   public static void queueTest(List<QueueOp> ops) throws TestFailure {
     try {
-      StackWithMax q = new StackWithMax();
+      StackWithMax8_1 q = new StackWithMax8_1();
 
       for (QueueOp op : ops) {
         switch (op.op) {
         case "QueueWithMax":
-          q = new StackWithMax();
+          q = new StackWithMax8_1();
           break;
         case "enqueue":
           q.enqueue(op.arg);

@@ -6,7 +6,10 @@ import epi.test_framework.TestFailure;
 import epi.test_framework.TimedExecutor;
 
 public class DoTerminatedListsOverlap7_4 {
-
+  /*
+  Meeting point is at same distance from the end, so for larger list if we move to diff spaces
+  then length of both is same
+   */
   public static ListNode<Integer>
   overlappingNoCycleLists(ListNode<Integer> l0, ListNode<Integer> l1) {
     ListNode<Integer> l0Head= l0, l1Head = l1;
