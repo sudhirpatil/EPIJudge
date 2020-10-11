@@ -32,6 +32,98 @@ public class KthLargestInArray11_8 {
    */
   @EpiTest(testDataFile = "kth_largest_in_array.tsv")
   public static int findKthLargest(int k, List<Integer> A) {
+    /*
+    like quick sort separate large & small array based on pivot
+    pick larger or smaller arr based on pivot index & kth largest
+     */
+    if(A.size() == 0)
+      return  0;
+
+    k--;
+    int first = 0, last = A.size()-1;
+    int pValue = 0;
+    while (first <= last){
+      // create sub arr
+      //get pivot & swap to last
+      int pIndex = first + (last-first)/2;
+      pValue = A.get(pIndex);
+      Collections.swap(A,pIndex, last);
+      int tempLast = last -1;
+      //loop & create sub array
+      for(int i = first; i <= last-1 && i<= tempLast;){
+        if(A.get(i) < pValue){
+          Collections.swap(A, i, tempLast--);
+        }else
+          i++;
+      }
+      // swap back first element of right half with last elem
+      pIndex = tempLast+1;
+      Collections.swap(A, pIndex, last);
+      //
+      //select sub array or return
+      if(pIndex == k){
+        break;
+      }else if(pIndex > k){
+        last = pIndex -1;
+      }else {
+        first = pIndex + 1;
+      }
+    }
+    return pValue;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public static int findKthLargest2(int k, List<Integer> A) {
+    /*
+    Like quick sort partition in to 2 arrays larger & smaller
+    if pivot = k , return the element, if not then choose higher or lower part & repeat
+     */
+    k--;
+    int start = 0, end = A.size() -1;
+    int pValue = A.get(end/2);
+    while (start<=end){
+      int pivotInd = start + (end-start)/2;
+      pValue = A.get(pivotInd);
+
+      Collections.swap(A, pivotInd, end);
+      int endTmp=end -1;
+      for(int i= start; i<=end -1 && i<= endTmp; ){
+        if(A.get(i) < pValue){
+          Collections.swap(A, i, endTmp--);
+        }else
+          i++;
+      }
+      pivotInd = endTmp +1;
+      Collections.swap(A, pivotInd, end);
+
+      if (pivotInd == k){
+        break;
+      }else if(pivotInd > k){
+        end = pivotInd -1;
+      }else {
+        start = pivotInd + 1;
+      }
+    }
+
+    return  pValue;
+  }
+
+  public static int findKthLargest1(int k, List<Integer> A) {
     if(k> A.size()) return -1;
 
     int pIndex = 0;

@@ -15,8 +15,44 @@ public class SortedArraysMerge10_1 {
   Think about creating metadata object when metadata reference needed in an item, like in this case index of list for the item
   Use iterator when we need to track/keep reference of index of current item
    */
-
   public static List<Integer> mergeSortedArrays(List<List<Integer>> sortedArrays) {
+    List<Integer> list = new ArrayList<>();
+    PriorityQueue<Index> pQue = new PriorityQueue<>(sortedArrays.size(), (i1, i2) -> {
+      return Integer.compare(i1.data, i2.data);
+    });
+
+    for(int i=0; i< sortedArrays.size(); i++){
+      pQue.add(new Index(sortedArrays.get(i).get(0), i, 0));
+    }
+
+    while (!pQue.isEmpty()){
+      Index ind = pQue.poll();
+      list.add(ind.data);
+      if(ind.li+1 < sortedArrays.get(ind.index).size()){
+        pQue.add(new Index(sortedArrays.get(ind.index).get(ind.li+1), ind.index, ind.li + 1));
+      }
+    }
+    return list;
+  }
+
+  public static class Index {
+    Integer data;
+    int index;
+    int li;
+
+    public Index(Integer d, int i, int li){
+      this.data = d;
+      this.index = i;
+      this.li = li;
+    }
+  }
+
+
+
+
+
+
+  public static List<Integer> mergeSortedArrays1(List<List<Integer>> sortedArrays) {
     List<Integer> output = new ArrayList<>();
     // Object with value & index of list in sortedArray
     // Store this object in heap, index to identify list & put next element in list to heap
