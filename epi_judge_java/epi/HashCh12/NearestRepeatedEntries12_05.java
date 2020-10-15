@@ -17,6 +17,26 @@ public class NearestRepeatedEntries12_05 {
 
   // OR just map of word => last occured index & every word compare and update global min
   public static int findNearestRepetition(List<String> paragraph) {
+    /*
+    hashmap with word , index position.
+    new word update minDistance & update map
+     */
+    int min =Integer.MAX_VALUE;
+    Map<String, Integer> map = new HashMap<>();
+    for(int i =0; i< paragraph.size();i++){
+      String str = paragraph.get(i);
+      if(map.containsKey(str)){
+        min = Math.min(min, i - map.get(str));
+      }
+      map.put(str, i);
+    }
+    return min == Integer.MAX_VALUE ? -1 : min;
+  }
+
+
+
+
+  public static int findNearestRepetition1(List<String> paragraph) {
     Map<String, Integer> map = new HashMap<>();
     int gDist = Integer.MAX_VALUE;
 

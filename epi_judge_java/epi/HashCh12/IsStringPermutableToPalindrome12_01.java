@@ -9,6 +9,23 @@ public class IsStringPermutableToPalindrome12_01 {
   @EpiTest(testDataFile = "is_string_permutable_to_palindrome.tsv")
 
   public static boolean canFormPalindrome(String s) {
+    Map<Character, Integer> map = new HashMap<>();
+    for(char c: s.toCharArray()){
+      map.computeIfPresent(c, (k,v) -> v+1);
+      map.putIfAbsent(c,1);
+    }
+
+    int oddNums = 0;
+    for(int num : map.values()){
+      if(num%2!=0)
+        oddNums++;
+      if(oddNums>1) return false;
+    }
+
+    return true;
+  }
+
+  public static boolean canFormPalindrome1(String s) {
     /*
     Get each char count in hashmap
     iterate to find out if more than one char count is odd, then it's not palindrome
