@@ -4,6 +4,7 @@ import epi.test_framework.EpiUserType;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 public class IntervalsUnion {
@@ -19,8 +20,42 @@ public class IntervalsUnion {
   }
 
   public static List<Interval> unionOfIntervals(List<Interval> intervals) {
-    // TODO - you fill in here.
-    return Collections.emptyList();
+    /*
+    Sort arr, closed to be last if both equal
+    keep adding currStart to currEnd,
+
+    Check if both are open : inverse it & check if any one of them is closed
+      How to improve conditions?
+     */
+    Interval[] arr = intervals.toArray(Interval[]:: new);
+    Arrays.sort(arr, (a, b) -> {
+      if(a.left.val != b.left.val)
+        return Integer.compare(a.left.val, b.left.val);
+
+      return (a.left.isClosed && !b.left.isClosed) ? -1 : (!a.left.isClosed && b.left.isClosed) ? 1 : 0;
+    });
+    List<Interval> list = new ArrayList();
+    Interval curr = null;
+    for(Interval i : arr) {
+      if (curr == null) {
+        curr = i;
+      } else {
+        if (i.left.val < curr.right.val || (i.left.val == curr.right.val && (i.left.isClosed || curr.right.isClosed))) {
+          if(i.right.val > curr.right.val){
+            curr.right = i.right;
+          } else if (i.right.val == curr.right.val) {
+            if (i.right.isClosed & !curr.right.isClosed) {
+              curr.right = i.right;
+            }
+          }
+        }else {
+          list.add(curr);
+          curr = i;
+        }
+      }
+    }
+    list.add(curr);
+    return list;
   }
   @EpiUserType(
       ctorParams = {int.class, boolean.class, int.class, boolean.class})

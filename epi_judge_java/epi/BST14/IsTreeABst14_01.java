@@ -1,7 +1,9 @@
-package epi;
+package epi.BST14;
+import epi.BinaryTreeNode;
 import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
-public class IsTreeABst {
+
+public class IsTreeABst14_01 {
   @EpiTest(testDataFile = "is_tree_a_bst.tsv")
 
   public static boolean isBinaryTreeBST(BinaryTreeNode<Integer> tree) {
