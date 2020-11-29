@@ -6,6 +6,7 @@ import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +55,6 @@ public class CircularQueue8_7 {
       circular[index] = x;
       tail = index;
       if(head == -1) head = 0;
-
       return;
     }
 

@@ -6,8 +6,7 @@ import epi.test_framework.TestFailure;
 import epi.test_framework.TimedExecutor;
 public class LowestCommonAncestorInBst {
 
-  // Input nodes are nonempty and the key at s is less than or equal to that at
-  // b.
+  // Input nodes are nonempty and the key at s is less than or equal to that at b.
   public static BstNode<Integer>
   findLCA(BstNode<Integer> tree, BstNode<Integer> s, BstNode<Integer> b) {
     // TODO - you fill in here.
